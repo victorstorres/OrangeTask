@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.orangetask.R
-import com.example.orangetask.ui.theme.orangeBackGroud
+import com.example.orangetask.theme.orangeBackGroud
 
 
 @Composable
