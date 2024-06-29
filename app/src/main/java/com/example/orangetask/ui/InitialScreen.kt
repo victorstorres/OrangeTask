@@ -29,7 +29,10 @@ import com.example.orangetask.theme.orangeBackGroud
 
 
 @Composable
-fun InitiaScreen(modifier: Modifier = Modifier) {
+fun InitiaScreen(
+    modifier: Modifier = Modifier,
+    onClickNext: () -> Unit = {}
+    ) {
     val image: Painter = painterResource(id = R.drawable.orange)
     val heightScreen = 200.dp
 
@@ -81,9 +84,7 @@ fun InitiaScreen(modifier: Modifier = Modifier) {
                 colors = ButtonDefaults.buttonColors(
                     containerColor = orangeBackGroud
                 ),
-                onClick = {
-
-                }) {
+                onClick = onClickNext ) {
                 Text(text = "Proximo")
             }
     }
