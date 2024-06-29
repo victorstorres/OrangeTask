@@ -5,10 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -32,20 +34,19 @@ import com.example.orangetask.theme.orangeBackGroud
 fun InitiaScreen(modifier: Modifier = Modifier) {
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Box(
-            modifier =
-            Modifier
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.5f)
                 .background(
                     orangeBackGroud,
                 ),
-
-            contentAlignment = Alignment.Center
 
         ) {
             Image(
@@ -70,10 +71,11 @@ fun InitiaScreen(modifier: Modifier = Modifier) {
                 fontSize = 24.sp
 
                 )
+        Spacer(modifier = Modifier.padding(top=10.dp))
             Button(
                 modifier = Modifier
                     .width(327.dp)
-                    .height(56.dp)
+                    .heightIn(56.dp)
                 ,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = orangeBackGroud
