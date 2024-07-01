@@ -1,4 +1,4 @@
-package com.example.orangetask.ui.theme
+package com.example.orangetask.theme
 
 import android.app.Activity
 import android.os.Build
