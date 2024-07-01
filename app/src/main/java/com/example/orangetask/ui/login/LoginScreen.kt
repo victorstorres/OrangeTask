@@ -55,7 +55,7 @@ fun LoginScreen(
 
         }
         Text(
-            text = "Qual e o seu nome?",
+            text = "Qual é o seu nome?",
             fontWeight = FontWeight.SemiBold,
             fontSize = 24.sp
 
