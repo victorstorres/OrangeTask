@@ -5,12 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -31,30 +28,38 @@ import com.example.orangetask.theme.orangeBackGroud
 
 
 @Composable
-fun InitiaScreen(modifier: Modifier = Modifier) {
+fun InitiaScreen(
+    modifier: Modifier = Modifier,
+    onClickNext: () -> Unit = {}
+    ) {
+    val image: Painter = painterResource(id = R.drawable.orange)
+    val heightScreen = 200.dp
 
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
+        Box(
+            modifier =
+            Modifier
+                .height(530.dp)
                 .fillMaxWidth()
-                .fillMaxHeight(0.5f)
                 .background(
                     orangeBackGroud,
                 ),
 
+            contentAlignment = Alignment.Center
+
         ) {
             Image(
                 modifier = Modifier
+                    .width(301.dp)
+                    .height(260.dp)
                     .padding(16.dp)
                     .shadow(elevation = 100.dp)
                 ,
-                painter = painterResource(id = R.drawable.orange),
+                painter = image,
                 contentDescription = "Orange_Image",
             )
 
@@ -65,25 +70,20 @@ fun InitiaScreen(modifier: Modifier = Modifier) {
                 fontSize = 25.sp
             )
             Text(
-                modifier = Modifier.padding(10.dp),
                 text ="Aplicativo de lista de compras",
                 fontWeight = FontWeight.Light,
                 fontSize = 24.sp
 
                 )
-        Spacer(modifier = Modifier.padding(top=10.dp))
             Button(
                 modifier = Modifier
                     .width(327.dp)
-                    .heightIn(56.dp)
+                    .height(56.dp)
                 ,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = orangeBackGroud
                 ),
-                onClick = {
-
-
-                }) {
+                onClick = onClickNext ) {
                 Text(text = "Proximo")
             }
     }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
@@ -24,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,15 +34,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.orangetask.data.Product
+import com.example.orangetask.dataBase.ProductDao
 import com.example.orangetask.ui.theme.orangeBackGroud
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun HomeScreen(
-    state: HomeScreenUiState,
+    state: HomeScreenUiState = HomeScreenUiState(),
     modifier: Modifier = Modifier,
     clickFloatActionButton: () -> Unit = {}
 ) {
+
     Scaffold(
         topBar = {
             TopAppBarOrangeTask(modifier = modifier, clickSearchButton = {
@@ -58,9 +69,10 @@ fun HomeScreen(
             modifier = Modifier.padding(paddingValues),
             contentPadding = PaddingValues(bottom = 65.dp)
         ) {
-            items(10) {
-                ProductCard(state)
+            items(state.products) { product ->
+                ProductCard(product)
             }
+
         }
         Spacer(modifier = Modifier.padding(20.dp))
     }
@@ -70,8 +82,11 @@ fun HomeScreen(
 private fun FloatActionButtonOrangeTask(
     clickFloatActionButton: () -> Unit = { }
 ) {
+
+
     FloatingActionButton(
-        containerColor = orangeBackGroud, onClick = clickFloatActionButton
+        containerColor = orangeBackGroud,
+        onClick = clickFloatActionButton
     ) {
         Icon(Icons.Default.Add, contentDescription = "ButtonAddFloatActionButton")
     }
@@ -107,7 +122,8 @@ private fun TopAppBarOrangeTask(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductCard(
-    state: HomeScreenUiState, elevetion: Dp = 4.dp, modifier: Modifier = Modifier
+    product: Product,
+    elevetion: Dp = 4.dp, modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier
@@ -129,11 +145,11 @@ fun ProductCard(
                 .fillMaxWidth()
                 .padding(15.dp)
         ) {
-            Text(text = "Abacaxi")
+            Text(text = product.name)
 
             Checkbox(
-                checked = state.checkBox,
-                onCheckedChange = { state.onCheckBoxChange(!state.checkBox) }
+                checked = product.isCheck,
+                onCheckedChange = { }
             )
         }
     }
