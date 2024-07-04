@@ -1,4 +1,4 @@
-package com.example.orangetask
+package com.example.orangetask.util
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
