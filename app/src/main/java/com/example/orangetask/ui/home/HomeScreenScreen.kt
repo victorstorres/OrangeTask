@@ -50,7 +50,6 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBarOrangeTask(modifier = modifier, clickSearchButton = {
-                Log.e("Teste", "Fui clicado")
             })
         },
         floatingActionButton = {

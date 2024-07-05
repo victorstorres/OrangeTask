@@ -16,7 +16,7 @@ import com.example.orangetask.navigation.LoginScreenNavigation
 fun OrangeTaskNavHost(
     navController: NavHostController,
 ) {
-    NavHost(navController = navController, startDestination = HOME_ROUTE) {
+    NavHost(navController = navController, startDestination = INITIALSCREEN_ROUTE) {
         LoginScreenNavigation(navController)
         InitialScreenNavigation(navController)
         HomeScreenNavigation(navController)
