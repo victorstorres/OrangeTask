@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.room")
+
 }
 
 android {
@@ -52,20 +54,30 @@ android {
     kapt {
         correctErrorTypes = true
     }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
     implementation(libs.androidx.navigation.compose)
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt( "androidx.room:room-compiler:$room_version")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     val nav_version = "2.7.7"
 
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
-    implementation ("com.google.dagger:hilt-android:2.51.1")
+    implementation("com.google.dagger:hilt-android:2.51.1")
     annotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
-    kapt ("com.google.dagger:hilt-compiler:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
 
-    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

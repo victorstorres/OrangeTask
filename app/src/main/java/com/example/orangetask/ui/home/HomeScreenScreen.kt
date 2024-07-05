@@ -25,7 +25,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,20 +36,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.orangetask.data.Product
-import com.example.orangetask.dataBase.ProductDao
 import com.example.orangetask.ui.theme.orangeBackGroud
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.launch
-
 
 @Composable
 fun HomeScreen(
     state: HomeScreenUiState = HomeScreenUiState(),
+    onCheckBoxChange: (Product, Boolean) -> Unit = {_, _ ->},
     modifier: Modifier = Modifier,
     clickFloatActionButton: () -> Unit = {}
 ) {
@@ -70,13 +65,17 @@ fun HomeScreen(
             contentPadding = PaddingValues(bottom = 65.dp)
         ) {
             items(state.products) { product ->
-                ProductCard(product)
-            }
+                ProductCard(
+                    product = product,
+                    onCheckBoxChange = onCheckBoxChange
 
+                )
+            }
         }
         Spacer(modifier = Modifier.padding(20.dp))
     }
 }
+
 
 @Composable
 private fun FloatActionButtonOrangeTask(
@@ -123,6 +122,7 @@ private fun TopAppBarOrangeTask(
 @Composable
 fun ProductCard(
     product: Product,
+    onCheckBoxChange: (Product, Boolean) -> Unit = {_, _ ->},
     elevetion: Dp = 4.dp, modifier: Modifier = Modifier
 ) {
     Card(
@@ -149,7 +149,10 @@ fun ProductCard(
 
             Checkbox(
                 checked = product.isCheck,
-                onCheckedChange = { }
+                onCheckedChange = {  isChecked ->
+                    onCheckBoxChange(product, isChecked )
+
+                }
             )
         }
     }
