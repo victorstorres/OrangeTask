@@ -1,20 +1,15 @@
 package com.example.orangetask.ui.home
 
-import android.util.Log
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.orangetask.data.Product
-import com.example.orangetask.dataBase.ProductDao
+import com.example.orangetask.dataBase.dao.ProductDao
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,23 +34,24 @@ class HomeScreenViewModel @Inject constructor(
                         name = it
                     )
                 },
-                onCheckBoxChange = {
-                    _uiState.value = _uiState.value.copy(
-                        checkBox = it
-                    )
-                }
 
+                )
+        }
+    }
+
+    fun updateProductCheckState(product: Product, isChecked: Boolean) {
+        val updatedProducts = _uiState.value.products.map {
+            if (it.id == product.id) it.copy(isCheck = isChecked) else it
+        }
+        _uiState.value = _uiState.value.copy(products = updatedProducts)
+    }
+    suspend fun listProduct() {
+        productDao.searchProducts().collect { listProduct ->
+            _uiState.value = _uiState.value.copy(
+                products = listProduct
             )
         }
     }
 
-    suspend fun listProduct() {
-        viewModelScope.launch {
-            productDao.searchProduct().collect { listProduct ->
-                _uiState.value = _uiState.value.copy(
-                    products = listProduct
-                )
-            }
-        }
-    }
 }
+

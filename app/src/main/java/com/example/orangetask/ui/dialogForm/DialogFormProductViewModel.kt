@@ -1,15 +1,13 @@
 package com.example.orangetask.ui.dialogForm
 
-import android.util.Log
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.orangetask.dataBase.ProductDao
+import com.example.orangetask.data.Product
+import com.example.orangetask.dataBase.dao.ProductDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DialogFormProductViewModel @Inject constructor(
     private val productDao: ProductDao
-): ViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DialogFormProductUiState())
 
@@ -26,7 +24,6 @@ class DialogFormProductViewModel @Inject constructor(
 
 
     init {
-        saveProduct()
         _uiState.update { state ->
             state.copy(
                 onNameChange = {
@@ -39,14 +36,13 @@ class DialogFormProductViewModel @Inject constructor(
     }
 
 
-    fun saveProduct(){
+    suspend fun saveProduct() {
         viewModelScope.launch {
-            productDao.createProduct(
-                _uiState.value.name
+            productDao.addProduct(
+                Product(
+                    name = _uiState.value.name
+                )
             )
-        }
-        viewModelScope.launch {
-            Log.e("Teste", "${productDao.searchProduct().first()}")
         }
     }
 }

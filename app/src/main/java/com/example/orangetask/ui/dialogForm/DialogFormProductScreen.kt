@@ -1,7 +1,9 @@
 package com.example.orangetask.ui.dialogForm
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +12,8 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -33,6 +37,7 @@ import com.example.orangetask.ui.theme.OrangeTaskTheme
 fun DialogFormProductScreen(
     state: DialogFormProductUiState,
     onClickSaveProduct: () -> Unit = {},
+    closeDialog: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Dialog(
@@ -41,12 +46,21 @@ fun DialogFormProductScreen(
                 modifier =
                 modifier
                     .clip(RoundedCornerShape(8))
-                    .height(250.dp)
+                    .height(300.dp)
                     .background(Color.White)
                     .padding(15.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
+                Box(modifier = Modifier.align(Alignment.End)) {
+                    Icon(
+                        Icons.Default.Close,
+                        contentDescription = "CloseDialog",
+                        modifier = Modifier.clickable {
+                            closeDialog()
+                        })
+                }
+
                 Text(
                     text = "Cadastre o seu Produto", fontWeight = FontWeight.SemiBold,
                     fontSize = 25.sp
