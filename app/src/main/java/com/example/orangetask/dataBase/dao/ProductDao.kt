@@ -3,6 +3,7 @@ package com.example.orangetask.dataBase.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.orangetask.data.Product
 import kotlinx.coroutines.flow.Flow
 @Dao
@@ -13,4 +14,10 @@ interface ProductDao{
 
     @Query("SELECT * FROM Product")
     fun searchProducts(): Flow<List<Product>>
+
+    @Query("SELECT * FROM Product WHERE id = :id")
+    fun searchProductForId(id: Long): Flow<Product>
+
+    @Update()
+    fun updateProduct(product: Product)
 }

@@ -1,6 +1,5 @@
 package com.example.orangetask.ui.home
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,9 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,7 +38,7 @@ import com.example.orangetask.ui.theme.orangeBackGroud
 @Composable
 fun HomeScreen(
     state: HomeScreenUiState = HomeScreenUiState(),
-    onCheckBoxChange: (Product, Boolean) -> Unit = {_, _ ->},
+    onCheckBoxChange: (Long, Boolean) -> Unit = {_, _ -> },
     modifier: Modifier = Modifier,
     clickFloatActionButton: () -> Unit = {}
 ) {
@@ -90,8 +86,8 @@ private fun FloatActionButtonOrangeTask(
     }
 }
 
-@Composable
 @OptIn(ExperimentalMaterial3Api::class)
+@Composable
 private fun TopAppBarOrangeTask(
     clickSearchButton: () -> Unit = { }, modifier: Modifier
 ) {
@@ -117,11 +113,10 @@ private fun TopAppBarOrangeTask(
     })
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductCard(
     product: Product,
-    onCheckBoxChange: (Product, Boolean) -> Unit = {_, _ ->},
+    onCheckBoxChange: (Long, Boolean) -> Unit = {_, _ -> },
     elevetion: Dp = 4.dp, modifier: Modifier = Modifier
 ) {
     Card(
@@ -148,9 +143,8 @@ fun ProductCard(
 
             Checkbox(
                 checked = product.isCheck,
-                onCheckedChange = {  isChecked ->
-                    onCheckBoxChange(product, isChecked )
-
+                onCheckedChange = {
+                    onCheckBoxChange(product.id, !product.isCheck)
                 }
             )
         }

@@ -24,11 +24,13 @@ class DataBaseModule {
             context,
             OrangeTaskDataBase::class.java,
             DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
     fun provideProductDao(db: OrangeTaskDataBase): ProductDao {
         return db.productDao()
     }
+
 }
