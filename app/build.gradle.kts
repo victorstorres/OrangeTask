@@ -78,6 +78,7 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.51.1")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.compose.material3:material3-android:1.2.0-rc01")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -86,7 +87,6 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

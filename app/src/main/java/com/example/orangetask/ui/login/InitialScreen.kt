@@ -31,9 +31,8 @@ import com.example.orangetask.theme.orangeBackGroud
 fun InitiaScreen(
     modifier: Modifier = Modifier,
     onClickNext: () -> Unit = {}
-    ) {
+) {
     val image: Painter = painterResource(id = R.drawable.orange)
-    val heightScreen = 200.dp
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -42,7 +41,7 @@ fun InitiaScreen(
     ) {
         Box(
             modifier =
-            Modifier
+            modifier
                 .height(530.dp)
                 .fillMaxWidth()
                 .background(
@@ -57,35 +56,34 @@ fun InitiaScreen(
                     .width(301.dp)
                     .height(260.dp)
                     .padding(16.dp)
-                    .shadow(elevation = 100.dp)
-                ,
+                    .shadow(elevation = 100.dp),
                 painter = image,
                 contentDescription = "Orange_Image",
             )
 
         }
-            Text(
-                text = "Bem vindo ao OrangeTask",
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 25.sp
-            )
-            Text(
-                text ="Aplicativo de lista de compras",
-                fontWeight = FontWeight.Light,
-                fontSize = 24.sp
+        Text(
+            text = "Bem vindo ao OrangeTask",
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 25.sp
+        )
+        Text(
+            text = "Aplicativo de lista de compras",
+            fontWeight = FontWeight.Light,
+            fontSize = 24.sp
 
-                )
-            Button(
-                modifier = Modifier
-                    .width(327.dp)
-                    .height(56.dp)
-                ,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = orangeBackGroud
-                ),
-                onClick = onClickNext ) {
-                Text(text = "Proximo")
-            }
+        )
+        Button(
+            modifier = Modifier
+                .width(327.dp)
+                .height(56.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = orangeBackGroud
+            ),
+            onClick = onClickNext
+        ) {
+            Text(text = "Proximo")
+        }
     }
 }
 

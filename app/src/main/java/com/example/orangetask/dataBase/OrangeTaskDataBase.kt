@@ -6,7 +6,7 @@ import com.example.orangetask.data.Product
 import com.example.orangetask.dataBase.dao.ProductDao
 
 @Database(
-    entities = [Product::class],
+    entities = [Product::class] ,
     version = 1,
     exportSchema = true)
 
