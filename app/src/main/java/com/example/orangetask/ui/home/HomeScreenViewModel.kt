@@ -1,15 +1,16 @@
 package com.example.orangetask.ui.home
 
-import androidx.compose.runtime.collectAsState
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.orangetask.data.Product
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.orangetask.dataBase.dao.ProductDao
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,12 +40,25 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun updateProductCheckState(product: Product, isChecked: Boolean) {
-        val updatedProducts = _uiState.value.products.map {
-            if (it.id == product.id) it.copy(isCheck = isChecked) else it
+    suspend fun updateProductCheckState(idProduct: Long, isCheck: Boolean) {
+        viewModelScope.launch {
+            val product = productDao.searchProductForId(idProduct).first()
+            if (product.id == idProduct) {
+                viewModelScope.launch(IO) {
+                    productDao.updateProduct(product.copy(isCheck = isCheck))
+                    _uiState.update { state ->
+                        state.copy(
+                            products = state.products.map {
+                                if (it.id == idProduct) it.copy(isCheck = isCheck) else it
+                            }
+                        )
+                    }
+
+                }
+            }
         }
-        _uiState.value = _uiState.value.copy(products = updatedProducts)
     }
+
     suspend fun listProduct() {
         productDao.searchProducts().collect { listProduct ->
             _uiState.value = _uiState.value.copy(
