@@ -4,7 +4,7 @@
 
 ## Sobre
 
-OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.1. Por isso, ele ainda possui um conjunto limitado de funcionalidades.
+OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.2 Por isso, ele ainda possui um conjunto limitado de funcionalidades.
 
 ## Tecnologias Utilizadas
 
