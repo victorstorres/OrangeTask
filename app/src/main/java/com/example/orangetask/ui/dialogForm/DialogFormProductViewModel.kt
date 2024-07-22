@@ -37,12 +37,10 @@ class DialogFormProductViewModel @Inject constructor(
 
 
     suspend fun saveProduct() {
-        viewModelScope.launch {
-            productDao.addProduct(
-                Product(
-                    name = _uiState.value.name
-                )
+        productDao.addProduct(
+            Product(
+                name = _uiState.value.name
             )
-        }
+        )
     }
 }

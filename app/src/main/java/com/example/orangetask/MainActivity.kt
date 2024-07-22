@@ -15,9 +15,7 @@ class MainActivity : ComponentActivity() {
             OrangeTaskTheme {
                 val navController = rememberNavController()
                 OrangeTaskNavHost(navController = navController)
-                
             }
         }
     }
 }
-
