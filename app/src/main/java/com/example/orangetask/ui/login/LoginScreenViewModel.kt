@@ -17,7 +17,6 @@ class LoginScreenViewModel @Inject constructor(
     private val dataStore: DataStore<Preferences>,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(LoginScreenUiState())
-
     val uiState: StateFlow<LoginScreenUiState>
         get() = _uiState.asStateFlow()
 

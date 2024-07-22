@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.orangetask.dataBase.dao.ProductDao
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -38,32 +37,31 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    suspend fun updateProductCheckState(idProduct: Long, isCheck: Boolean) {
-        viewModelScope.launch {
-            val product = productDao.searchProductForId(idProduct).first()
-            if (product.id == idProduct) {
-                viewModelScope.launch(IO) {
-                    productDao.updateProduct(product.copy(isCheck = isCheck))
-                    _uiState.update { state ->
-                        state.copy(
-                            products = state.products.map {
-                                if (it.id == idProduct) it.copy(isCheck = isCheck) else it
-                            }
-                        )
-                    }
+     suspend fun removeProduct(id: Long) {
+       productDao.removeProduct(id)
+    }
 
+
+     suspend fun updateProductCheckState(idProduct: Long, isCheck: Boolean) {
+        val product = productDao.searchProductForId(idProduct).first()
+        if (product.id == idProduct) {
+                productDao.updateProduct(product.copy(isCheck = isCheck))
+                _uiState.update { state ->
+                    state.copy(
+                        products = state.products.map {
+                            if (it.id == idProduct) it.copy(isCheck = isCheck) else it
+                        }
+                    )
                 }
-            }
         }
     }
 
-    suspend fun listProduct() {
+    private suspend fun listProduct() {
         productDao.searchProducts().collect { listProduct ->
             _uiState.value = _uiState.value.copy(
                 products = listProduct
             )
         }
     }
-
 }
 
