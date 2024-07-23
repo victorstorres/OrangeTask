@@ -24,4 +24,9 @@ interface ProductDao {
 
     @Query("Delete FROM Product WHERE id = :id ")
     suspend fun removeProduct(id: Long)
+
+    @Query("SELECT * FROM Product WHERE name LIKE :productName||'%'\n")
+    fun searchProductForName(
+        productName: String,
+    ): Flow<List<Product>>
 }

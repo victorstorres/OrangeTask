@@ -40,13 +40,13 @@ fun HomeScreen(
     state: HomeScreenUiState = HomeScreenUiState(),
     onCheckBoxChange: (Long, Boolean) -> Unit = {_, _ -> },
     modifier: Modifier = Modifier,
-    clickFloatActionButton: () -> Unit = {}
+    clickFloatActionButton: () -> Unit = {},
+    clickSearchButton: () -> Unit
 ) {
 
     Scaffold(
         topBar = {
-            TopAppBarOrangeTask(modifier = modifier, clickSearchButton = {
-            })
+            TopAppBarOrangeTask(modifier = modifier, clickSearchButton = clickSearchButton)
         },
         floatingActionButton = {
             FloatActionButtonOrangeTask(

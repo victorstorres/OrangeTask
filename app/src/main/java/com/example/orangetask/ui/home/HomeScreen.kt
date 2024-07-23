@@ -34,14 +34,14 @@ fun HomeScreen(
     onCheckBoxChange: (Long, Boolean) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier,
     removeProduct: (Long) -> Unit = {},
-    clickFloatActionButton: () -> Unit = {}
+    clickFloatActionButton: () -> Unit = {},
+    clickSearchButton: () -> Unit = {}
 
 ) {
 
     Scaffold(
         topBar = {
-            TopAppBarOrangeTask(modifier = modifier, clickSearchButton = {
-            })
+            TopAppBarOrangeTask(modifier = modifier, clickSearchButton = clickSearchButton)
         },
         floatingActionButton = {
             FloatActionButtonOrangeTask(
@@ -113,8 +113,6 @@ private fun TopAppBarOrangeTask(
 }
 
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showSystemUi = true)
 @Composable
 private fun HomeScreenPrev() {
