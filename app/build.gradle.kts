@@ -80,6 +80,7 @@ dependencies {
 
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("androidx.compose.material3:material3-android:1.2.0-rc01")
+    implementation("io.coil-kt:coil-compose:2.7.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -94,5 +95,5 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    debugImplementation(libs.androidx.ui.test.manifest) 
 }
