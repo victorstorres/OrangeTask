@@ -7,38 +7,37 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.dialog
-import com.example.orangetask.navigaToDialogPhoto
-import com.example.orangetask.ui.dialogForm.DialogFormProductScreen
-import com.example.orangetask.ui.dialogForm.DialogFormProductViewModel
+import com.example.orangetask.ui.dialogForm.DialogPhotoScreen
+import com.example.orangetask.ui.dialogForm.DialogPhotoViewModel
 import kotlinx.coroutines.launch
 
-const val DIALOG_FORM_PRODUCT_SCREEN = "FormProductScree"
+const val DIALOG_PHOTO_SCREEN = "DialogPhoto"
 
-fun NavGraphBuilder.DialogFormProductScreenNavigation(navController: NavHostController) {
+
+fun NavGraphBuilder.DialogPhotoScreenNavigation(navController: NavHostController) {
     dialog(
-        route = DIALOG_FORM_PRODUCT_SCREEN,
+        route = DIALOG_PHOTO_SCREEN,
     ) {
 
 
-        val viewModel = hiltViewModel<DialogFormProductViewModel>()
+        val viewModel = hiltViewModel<DialogPhotoViewModel>()
         val state by viewModel.uiState.collectAsState()
         val coroutineScope = rememberCoroutineScope()
 
 
-        DialogFormProductScreen(
+        DialogPhotoScreen(
             state = state,
-            onClickSaveProduct = {
+            onClickSavePhoto = {
                 coroutineScope.launch {
-                    viewModel.saveProduct()
+                    viewModel.saveImage()
                 }
                 navController.popBackStack()
             },
             closeDialog = {
                 navController.popBackStack()
-            },
-            onClickCamera = {
-                navController.navigaToDialogPhoto()
             }
         )
+
+
     }
 }

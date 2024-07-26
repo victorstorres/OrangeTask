@@ -12,4 +12,5 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "lo
 
 object PreferencesKey {
     val logged = booleanPreferencesKey("user_logged")
+    val imageProduct = stringPreferencesKey("product_image")
 }
