@@ -6,12 +6,19 @@ import android.content.Context
 import androidx.compose.foundation.MutatePriority
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
@@ -29,12 +36,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.example.orangetask.R
 import com.example.orangetask.data.Product
+import com.example.orangetask.theme.orangeBackGroud
 import kotlinx.coroutines.launch
 
 
@@ -77,19 +92,13 @@ fun SwipeProduct(
 
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun PrevCard() {
-    SwipeProduct(product = Product(name = "Roberta"))
-}
-
-
 @Composable
 fun ProductCard(
     product: Product,
     onCheckBoxChange: (Long, Boolean) -> Unit = { _, _ -> },
     elevetion: Dp = 4.dp, modifier: Modifier = Modifier,
 ) {
+
 
     Card(
         modifier = modifier
@@ -104,24 +113,59 @@ fun ProductCard(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(15.dp)
+            horizontalArrangement = Arrangement.Center,
         ) {
-            Text(text = product.name)
-
-            Checkbox(
-                checked = product.isCheck,
-                onCheckedChange = {
-                    onCheckBoxChange(product.id, !product.isCheck)
+            Box (Modifier.padding(
+                horizontal = 5.dp,
+                vertical = 1.dp
+                )){
+                if (product.image != "") {
+                    AsyncImage(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .size(48.dp),
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(product.image).build(),
+                        placeholder = painterResource(R.drawable.no_image),
+                        error = painterResource(R.drawable.no_image),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "Photo Product",
+                    )
                 }
-            )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(15.dp)
+            ) {
 
+                Text(text = product.name)
+
+                Checkbox(
+                    checked = product.isCheck,
+                    onCheckedChange = {
+                        onCheckBoxChange(product.id, !product.isCheck)
+                    }
+                )
+
+            }
         }
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun PrevCard() {
+    SwipeProduct(product = Product(name = "Roberta"))
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PrevCardWithImage() {
+    SwipeProduct(product = Product(name = "Roberta", image = "https://picsum.photos/200"))
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

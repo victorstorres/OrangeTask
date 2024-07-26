@@ -1,9 +1,11 @@
 package com.example.orangetask.di.module
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Room
 import com.example.orangetask.dataBase.OrangeTaskDataBase
 import com.example.orangetask.dataBase.dao.ProductDao
+import com.example.orangetask.dataBase.migration.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,8 +26,7 @@ class DataBaseModule {
             context,
             OrangeTaskDataBase::class.java,
             DATABASE_NAME
-        ).fallbackToDestructiveMigration()
-            .build()
+        ).build()
     }
 
     @Provides

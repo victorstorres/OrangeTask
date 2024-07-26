@@ -1,10 +1,14 @@
 package com.example.orangetask
 
+import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.orangetask.navigation.DIALOG_FORM_PRODUCT_SCREEN
+import com.example.orangetask.navigation.DIALOG_PHOTO_SCREEN
 import com.example.orangetask.navigation.DialogFormProductScreenNavigation
+import com.example.orangetask.navigation.DialogPhotoScreenNavigation
 import com.example.orangetask.navigation.HOME_ROUTE
 import com.example.orangetask.navigation.HomeScreenNavigation
 import com.example.orangetask.navigation.INITIALSCREEN_ROUTE
@@ -14,16 +18,18 @@ import com.example.orangetask.navigation.LoginScreenNavigation
 import com.example.orangetask.navigation.SEARCH_ROUTE
 import com.example.orangetask.navigation.SearchProductNavigation
 import com.example.orangetask.navigation.SplashScreenNavigation
+import com.example.orangetask.navigation.SplashScreenRoute
 
 @Composable
 fun OrangeTaskNavHost(
     navController: NavHostController,
 ) {
-    NavHost(navController = navController, startDestination = SEARCH_ROUTE) {
+    NavHost(navController = navController, startDestination = SplashScreenRoute) {
         LoginScreenNavigation(navController)
         InitialScreenNavigation(navController)
         HomeScreenNavigation(navController)
         DialogFormProductScreenNavigation(navController)
+        DialogPhotoScreenNavigation(navController)
         SearchProductNavigation(navController)
         SplashScreenNavigation(
             navigationToLogin = { navController.navigateToLoginScreen() },
@@ -57,6 +63,10 @@ fun NavHostController.navigateToLoginScreen() {
 
 fun NavHostController.navigateToInitialScreen() {
     navigate(INITIALSCREEN_ROUTE)
+}
+
+fun NavHostController.navigaToDialogPhoto(){
+    navigate(DIALOG_PHOTO_SCREEN)
 }
 
 
