@@ -8,7 +8,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.dialog
 import com.example.orangetask.navigaToDialogPhoto
-import com.example.orangetask.navigateToHomeScreen
 import com.example.orangetask.ui.dialogForm.DialogFormProductScreen
 import com.example.orangetask.ui.dialogForm.DialogFormProductViewModel
 import kotlinx.coroutines.launch
