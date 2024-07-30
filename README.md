@@ -7,12 +7,15 @@
 OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.4 Por isso, ele ainda possui um conjunto limitado de funcionalidades.
 
 ## Tecnologias Utilizadas
-
 - **Kotlin**: Linguagem de programação principal.
 - **Room**: Biblioteca para persistência de dados.
 - **Hilt**: Injeção de dependência simplificada.
 - **ViewModel**: Armazenamento de dados para interface de forma resiliente.
+<<<<<<< Updated upstream
 - **Coin**: Biblioteca para adicionar imagens da web.
+=======
+- **Coil**: biblioteca de carregamento de imagens da internet.
+>>>>>>> Stashed changes
 
 ## Video de demonstração do app
 

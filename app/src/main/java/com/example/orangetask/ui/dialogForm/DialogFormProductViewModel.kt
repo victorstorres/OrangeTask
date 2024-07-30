@@ -2,6 +2,7 @@ package com.example.orangetask.ui.dialogForm
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import com.example.orangetask.data.Product
 import com.example.orangetask.dataBase.dao.ProductDao
@@ -16,7 +17,6 @@ import javax.inject.Inject
 @HiltViewModel
 class DialogFormProductViewModel @Inject constructor(
     private val productDao: ProductDao,
-    private val dataStore: DataStore<Preferences>,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DialogFormProductUiState())
@@ -37,15 +37,12 @@ class DialogFormProductViewModel @Inject constructor(
         }
     }
 
-
-    suspend fun saveProduct() {
-        dataStore.data.collect {
-
+    suspend fun saveProduct(url: String) {
+        if (url.isNotEmpty()) {
             productDao.addProduct(
                 Product(
                     name = _uiState.value.name,
-                    image = it[PreferencesKey.imageProduct].toString()
-
+                    image = url
                 )
             )
         }

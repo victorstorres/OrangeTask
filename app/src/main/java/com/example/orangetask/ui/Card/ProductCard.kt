@@ -39,12 +39,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.orangetask.R
 import com.example.orangetask.data.Product
-import com.example.orangetask.theme.orangeBackGroud
 import kotlinx.coroutines.launch
 
 
@@ -110,17 +107,18 @@ fun ProductCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
         ) {
-            Box (Modifier.padding(
-                horizontal = 5.dp,
-                vertical = 1.dp
-                )){
+            Box(
+                Modifier.padding(
+                    horizontal = 5.dp,
+                    vertical = 1.dp
+                )
+            ) {
                 if (product.image != "") {
                     AsyncImage(
                         modifier = Modifier
                             .clip(CircleShape)
                             .size(48.dp),
-                        model = ImageRequest.Builder(LocalContext.current)
-                            .data(product.image).build(),
+                        model = product.image,
                         placeholder = painterResource(R.drawable.no_image),
                         error = painterResource(R.drawable.no_image),
                         contentScale = ContentScale.Crop,
