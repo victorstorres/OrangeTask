@@ -11,11 +11,15 @@ OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.4 Por iss
 - **Room**: Biblioteca para persistência de dados.
 - **Hilt**: Injeção de dependência simplificada.
 - **ViewModel**: Armazenamento de dados para interface de forma resiliente.
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 - **Coin**: Biblioteca para adicionar imagens da web.
 =======
 - **Coil**: biblioteca de carregamento de imagens da internet.
 >>>>>>> Stashed changes
+=======
+- **Coin**: Biblioteca para adicionar imagens da web.
+>>>>>>> 655b262cd9be3198aa834f2ab2b23a1455c54266
 
 ## Video de demonstração do app
 
