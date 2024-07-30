@@ -34,7 +34,7 @@ fun NavGraphBuilder.HomeScreenNavigation(navController: NavHostController) {
             clickSearchButton = {
                 navController.navigateToSearchProductScreen()
             },
-            onCheckBoxChange = { product , isCheck->
+            onCheckBoxChange = { product, isCheck ->
                 coroutine.launch {
                     viewModel.updateProductCheckState(product, isCheck)
                 }
