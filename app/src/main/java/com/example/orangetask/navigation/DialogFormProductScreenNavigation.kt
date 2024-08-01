@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 const val DIALOG_FORM_PRODUCT_SCREEN = "FormProductScree"
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-fun NavGraphBuilder.DialogFormProductScreenNavigation(navController: NavHostController) {
+fun NavGraphBuilder.dialogFormProductScreenNavigation(navController: NavHostController) {
     dialog(
         route = DIALOG_FORM_PRODUCT_SCREEN,
     ) {
@@ -65,8 +65,6 @@ fun NavGraphBuilder.DialogFormProductScreenNavigation(navController: NavHostCont
                     )
                 }
             }
-
-
 
         DialogFormProductScreen(
             state = state,

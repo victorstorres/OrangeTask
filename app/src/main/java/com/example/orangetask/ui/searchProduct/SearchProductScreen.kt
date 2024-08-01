@@ -24,13 +24,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.orangetask.ui.home.ProductCard
+import com.example.orangetask.ui.Card.SwipeProduct
 
 @Composable
 fun SearchProductScreen(
     modifier: Modifier = Modifier,
     state: SearchProductUiState = SearchProductUiState(),
     onClickBack: () -> Unit = {},
+    removeProduct: (Long) -> Unit = {},
 ) {
     Scaffold(
         modifier = modifier,
@@ -43,8 +44,11 @@ fun SearchProductScreen(
         }
     ) { paddingValues ->
         LazyColumn(modifier.padding(paddingValues)) {
-            items(state.products){ products ->
-                ProductCard(product = products)
+            items(state.products) { products ->
+                SwipeProduct(
+                    product = products,
+                    removeProduct = removeProduct
+                )
             }
         }
     }
@@ -92,7 +96,7 @@ fun AppBarSearchProduct(
                 },
                 cursorBrush = SolidColor(Color(0xFF6200EE)),
 
-            )
+                )
         }
         VerticalDivider(thickness = 4.dp)
     }
