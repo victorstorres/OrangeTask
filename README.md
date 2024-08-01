@@ -4,7 +4,7 @@
 
 ## Sobre
 
-OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.4 Por isso, ele ainda possui um conjunto limitado de funcionalidades.
+OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.5 Por isso, ele ainda possui um conjunto limitado de funcionalidades.
 
 ## Tecnologias Utilizadas
 - **Kotlin**: Linguagem de programação principal.

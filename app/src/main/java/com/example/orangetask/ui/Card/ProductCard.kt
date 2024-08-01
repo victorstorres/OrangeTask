@@ -2,7 +2,6 @@
 
 package com.example.orangetask.ui.Card
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,7 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -50,7 +48,6 @@ fun SwipeProduct(
     product: Product,
     onCheckBoxChange: (Long, Boolean) -> Unit = { _, _ -> },
     elevetion: Dp = 4.dp, modifier: Modifier = Modifier,
-    context: Context = LocalContext.current,
     removeProduct: (Long) -> Unit = {},
 ) {
 
@@ -77,7 +74,7 @@ fun SwipeProduct(
             product = product,
             onCheckBoxChange = onCheckBoxChange,
             elevetion = elevetion,
-            modifier = modifier
+            modifier = modifier.padding(5.dp)
         )
     }
 
@@ -85,7 +82,7 @@ fun SwipeProduct(
 }
 
 @Composable
-fun ProductCard(
+private fun ProductCard(
     product: Product,
     onCheckBoxChange: (Long, Boolean) -> Unit = { _, _ -> },
     elevetion: Dp = 4.dp, modifier: Modifier = Modifier,
@@ -113,7 +110,7 @@ fun ProductCard(
                     vertical = 1.dp
                 )
             ) {
-                if (product.image != "") {
+                if (product.image.isNotEmpty() && product.image != "null") {
                     AsyncImage(
                         modifier = Modifier
                             .clip(CircleShape)
@@ -150,19 +147,19 @@ fun ProductCard(
 
 @Preview(showBackground = true)
 @Composable
-fun PrevCard() {
-    SwipeProduct(product = Product(name = "Roberta"))
+private fun PrevCard() {
+    SwipeProduct(product = Product(name = "Roberta", image = ""))
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PrevCardWithImage() {
-    SwipeProduct(product = Product(name = "Roberta", image = "https://picsum.photos/200"))
+private fun PrevCardWithImage() {
+    SwipeProduct(product = Product(name = "Roberta", image = "null"))
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DismissBackground(dismissState: SwipeToDismissBoxState) {
+private fun DismissBackground(dismissState: SwipeToDismissBoxState) {
     if (dismissState.targetValue == SwipeToDismissBoxValue.EndToStart) {
         Row(
             modifier = Modifier

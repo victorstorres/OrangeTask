@@ -56,7 +56,7 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    private suspend fun listProduct() {
+    suspend fun listProduct() {
         productDao.searchProducts().collect { listProduct ->
             _uiState.value = _uiState.value.copy(
                 products = listProduct

@@ -8,5 +8,4 @@ data class HomeScreenUiState (
     val onNameChange: (String) -> Unit = {},
     val checkBox: Boolean = false,
     val onCheckBoxChange: (Boolean) -> Unit = {},
-) {
-}
+)

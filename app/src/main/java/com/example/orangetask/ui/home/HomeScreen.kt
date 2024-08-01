@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,7 +21,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,16 +32,14 @@ import com.example.orangetask.ui.theme.orangeBackGroud
 fun HomeScreen(
     state: HomeScreenUiState = HomeScreenUiState(),
     onCheckBoxChange: (Long, Boolean) -> Unit = { _, _ -> },
-    modifier: Modifier = Modifier,
-    removeProduct: (Long) -> Unit = {},
     clickFloatActionButton: () -> Unit = {},
-    clickSearchButton: () -> Unit = {}
-
+    clickSearchButton: () -> Unit = {},
+    removeProduct: (Long) -> Unit = {}
 ) {
 
     Scaffold(
         topBar = {
-            TopAppBarOrangeTask(modifier = modifier, clickSearchButton = clickSearchButton)
+            TopAppBarOrangeTask(modifier = Modifier, clickSearchButton = clickSearchButton)
         },
         floatingActionButton = {
             FloatActionButtonOrangeTask(
@@ -50,23 +48,20 @@ fun HomeScreen(
         },
 
         ) { paddingValues ->
-
-        val context = LocalContext.current
-
         LazyColumn(
-            modifier = modifier.padding(paddingValues),
-            contentPadding = PaddingValues(bottom = 65.dp),
+            modifier = Modifier.padding(paddingValues),
+            contentPadding = PaddingValues(bottom = 65.dp)
         ) {
-            items(items = state.products) { product ->
+            items(state.products) { product ->
                 SwipeProduct(
-                    modifier = modifier,
-                    removeProduct = removeProduct,
                     product = product,
                     onCheckBoxChange = onCheckBoxChange,
-                    context = context
+                    removeProduct = removeProduct
+
                 )
             }
         }
+        Spacer(modifier = Modifier.padding(20.dp))
     }
 }
 
@@ -109,6 +104,7 @@ private fun TopAppBarOrangeTask(
                     .padding(horizontal = 10.dp)
                     .clickable { clickSearchButton.invoke() })
         }
+
     })
 }
 
@@ -116,12 +112,7 @@ private fun TopAppBarOrangeTask(
 @Preview(showSystemUi = true)
 @Composable
 private fun HomeScreenPrev() {
-    HomeScreen(HomeScreenUiState())
-}
+    HomeScreen {
 
-
-@Preview
-@Composable
-private fun ProductCardPrev() {
-//    ProductCard(product = Product(name = "Teste"), context = LocalContext.current)
+    }
 }

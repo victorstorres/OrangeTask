@@ -13,7 +13,7 @@ import com.example.orangetask.ui.login.LoginScreenViewModel
 import kotlinx.coroutines.launch
 
 const val LOGIN_ROUTE = "LoginRoute"
-fun NavGraphBuilder.LoginScreenNavigation(navController: NavHostController) {
+fun NavGraphBuilder.loginScreenNavigation(navController: NavHostController) {
     composable(LOGIN_ROUTE) {
         val viewModel = hiltViewModel<LoginScreenViewModel>()
         val state by viewModel.uiState.collectAsState()
