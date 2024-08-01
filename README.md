@@ -8,6 +8,7 @@ OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.6 Por iss
 
 ## Tecnologias Utilizadas
 - **Kotlin**: Linguagem de programação principal.
+- **JetPack Compose**: é um kit de ferramentas do Android que fornece componentes e APIs para criar telas e interfaces de usuário de forma mais eficiente e flexível.
 - **Room**: Biblioteca para persistência de dados.
 - **Hilt**: Injeção de dependência simplificada.
 - **ViewModel**: Armazenamento de dados para interface de forma resiliente.
