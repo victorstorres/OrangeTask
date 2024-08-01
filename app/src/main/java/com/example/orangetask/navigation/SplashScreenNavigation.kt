@@ -17,7 +17,7 @@ import com.example.orangetask.ui.splashScreen.SplashScreenViewModel
 
 const val SplashScreenRoute = ("decideIntial")
 
-fun NavGraphBuilder.SplashScreenNavigation(
+fun NavGraphBuilder.splashScreenNavigation(
     navigationToLogin: () -> Unit,
     navigationToHome: () -> Unit,
 ) {

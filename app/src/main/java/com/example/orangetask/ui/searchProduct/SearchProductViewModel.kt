@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchProductViewModel @Inject constructor(
-    val dao: ProductDao
+    val dao: ProductDao,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchProductUiState())
@@ -26,6 +26,8 @@ class SearchProductViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            searchProduct()
+            listProduct()
         }
 
         _uiState.update { state ->
@@ -53,5 +55,17 @@ class SearchProductViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(
             products = newList
         )
+    }
+
+    suspend fun removeProduct(id: Long){
+        dao.removeProduct(id)
+    }
+
+    private suspend fun listProduct() {
+        dao.searchProducts().collect { listProduct ->
+            _uiState.value = _uiState.value.copy(
+                products = listProduct
+            )
+        }
     }
 }
