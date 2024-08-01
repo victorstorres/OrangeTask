@@ -4,22 +4,16 @@
 
 ## Sobre
 
-OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.5 Por isso, ele ainda possui um conjunto limitado de funcionalidades.
+OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.6 Por isso, ele ainda possui um conjunto limitado de funcionalidades.
 
 ## Tecnologias Utilizadas
 - **Kotlin**: Linguagem de programação principal.
 - **Room**: Biblioteca para persistência de dados.
 - **Hilt**: Injeção de dependência simplificada.
 - **ViewModel**: Armazenamento de dados para interface de forma resiliente.
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 - **Coin**: Biblioteca para adicionar imagens da web.
-=======
-- **Coil**: biblioteca de carregamento de imagens da internet.
->>>>>>> Stashed changes
-=======
-- **Coin**: Biblioteca para adicionar imagens da web.
->>>>>>> 655b262cd9be3198aa834f2ab2b23a1455c54266
+- **MediaStore** é uma API do Android que permite que os aplicativos acessem e armazenem arquivos de mídia, como imagens, vídeos e áudios.
+  (Estou usando ele para acessar fotos do dispositivo )
 
 ## Video de demonstração do app
 
@@ -27,5 +21,8 @@ OrangeTask é um aplicativo em fase de estudo, atualmente na versão 1.5 Por iss
 
 
 
-https://github.com/user-attachments/assets/803b7a77-8fd4-4544-b3e1-a95920467c96
+
+
+
+https://github.com/user-attachments/assets/1770f523-28c3-40e2-b51a-624d0ace108e
 
